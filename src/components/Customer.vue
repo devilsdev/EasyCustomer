@@ -118,22 +118,4 @@ export default {
 </script>
 
 <style>
-    #customerField{
-        max-height: 200px;
-        max-width: 250px;
-        margin: 20px;
-    }
-    #customerField{
-        padding-top: 15px;
-        text-align: center;
-    }
-
-    #editCustomerPage{
-        position: absolute;
-    }
-
-    #aboveAll{
-        position: absolute;
-        top: 123px;
-    }
 </style>

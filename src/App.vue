@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1>Customer App</h1>
-    <div>
+    <h1 class="ui header" id="heading">Easy Customer</h1>
+    <div class="ui center aligned grid" id="contentGrid">
       <customer-list v-bind:customers="customers"></customer-list>
       <new-customer id="addCustomerButton" v-on:create-customer="addCustomer"></new-customer>
     </div>
@@ -52,11 +52,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
-
-#searchbar{
-  align: center;
+  margin: 0;
+  padding: 0;
 }
 
 #addCustomerButton{
@@ -64,4 +61,14 @@ export default {
   bottom: 30px;
   right: 30px;
 }
+
+#contentGrid{
+  margin-left: 5px;
+}
+
+#heading{
+  text-align: center;
+  padding-top: 4vh;
+}
+
 </style>

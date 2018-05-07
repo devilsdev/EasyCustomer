@@ -1,12 +1,10 @@
 <template>
-    <div class="ui basic content center aligned segment">
-        <button id="addCustomerButton" class="circular ui icon button">
-            <i id="iconPlus" class="plus icon" v-on:click="openForm" v-show="!isCreating"></i>
-        </button>
-        <div class="ui centered card" v-show="isCreating">
-            <div class="content">
-                <div class="ui form">
-                    <div class="ui-form">
+    <div class="ui middle aligned center aligned grid">
+        <i id="iconPlus" class="plus icon" v-on:click="openForm" v-show="!isCreating"></i>
+        <div class="ui middle aligned center aligned grid" v-show="isCreating">
+            <div class="column">
+                <div class="ui large form">
+                    <div class="ui stacked segment">
                         <div class="field">
                             <label>Customer Number</label>
                             <input v-model="customerNumber" type="text" ref="customerNumber" defaultValue="">
@@ -106,18 +104,8 @@ export default {
 </script>
 
 <style>
-#addCustomerButton {
-    width: 90px;
-    height: 90px;
-    border-radius: 100%;
+#iconPlus{
+    font-size: 2em;
 }
 
-#iconPlus{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    font-size: 2.5em;
-}
 </style>

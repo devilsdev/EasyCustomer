@@ -1,10 +1,13 @@
 <template>
-    <div>
+    <div class="">
         <div class="ui search" id="searchbar">
           <input class="prompt" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
-        <div class="ui four column doubling grid">
-          <customer v-on:update-customer="updateCustomer" v-on:delete-customer="deleteCustomer" v-for="customer in filteredCustomers"
+        <div class="ui grid">
+          <customer
+            v-on:update-customer="updateCustomer"
+            v-on:delete-customer="deleteCustomer"
+            v-for="customer in filteredCustomers"
             v-bind:customer="customer" :key="customer._id">
           </customer>
         </div>
@@ -32,8 +35,6 @@ export default {
         for (let prop of customerProps) {
           if (prop.toLowerCase().match(this.search.toLowerCase())) {
             // if prop is matching with name or lastname, search for lastname or name
-            let wurst = 1
-            console.log(wurst)
             return true
           }
         }
@@ -56,5 +57,10 @@ export default {
 </script>
 
 <style>
+
+#searchbar{
+  padding-top: 2.5vh;
+  padding-bottom: 5vh;
+}
 
 </style>
