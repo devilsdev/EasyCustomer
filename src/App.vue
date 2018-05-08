@@ -62,10 +62,6 @@ export default {
   right: 30px;
 }
 
-#contentGrid{
-  margin-left: 5px;
-}
-
 #heading{
   text-align: center;
   padding-top: 4vh;

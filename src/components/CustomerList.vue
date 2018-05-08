@@ -3,7 +3,20 @@
         <div class="ui search" id="searchbar">
           <input class="prompt" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
-        <div class="ui grid">
+        <div class="ui celled table">
+          <thead>
+            <tr>
+              <th>Customer No.</th>
+              <th>Name</th>
+              <th>Lastname</th>
+              <th>Street</th>
+              <th>Postcode</th>
+              <th>City</th>
+              <th>Telephone</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
           <customer
             v-on:update-customer="updateCustomer"
             v-on:delete-customer="deleteCustomer"

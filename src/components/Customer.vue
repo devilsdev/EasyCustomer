@@ -1,25 +1,21 @@
 <template>
-    <div class="" id="customerField">
-        <div class="ui card" v-show="!isEditing">
-            <div class="content">
-                <div class="header">
-                    {{ customer.name }} {{ customer.lastname }}
-                </div>
-                <div class="meta">
-                    {{ customer.adress }} <br/>
-                    {{ customer.postcode }} <br/>
-                    {{ customer.city }} <br/>
-                    {{ customer.phone }} <br/>
-                    {{ customer.email }} <br/>
-                    {{ customer.customerNumber }}
-                </div>
-                <div class="extra content">
-                    <a v-on:click="showForm"><i class="edit icon" ></i> Edit</a>
-                    <a v-on:click="deleteCustomer(customer)"><i class="trash alternate icon" ></i> Delete</a>
-                </div>
-            </div>
-        </div>
-        <!--visible in edit mode of todo-->
+    <tbody>
+        <tr>
+            <td>{{ customer.customerNumber }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.lastname }}</td>
+            <td>{{ customer.adress }} </td>
+            <td>{{ customer.postcode }} </td>
+            <td>{{ customer.city }} </td>
+            <td>{{ customer.phone }} </td>
+            <td>{{ customer.email }} </td>
+            <td>
+                <a v-on:click="showForm"><i class="edit icon" ></i> Edit</a>
+                <a v-on:click="deleteCustomer(customer)"><i class="trash alternate icon" ></i> Delete</a>
+            </td>
+        </tr>
+    </tbody>
+        <!--visible in edit mode of todo
         <div class="aboveAll" id="editCustomerPage" v-show="isEditing">
             <div class="header">
                 Edit Customer
@@ -68,9 +64,7 @@
                     </button>
                 </div>
             </div>
-            <!--end of editing view-->
-        </div>
-    </div>
+            end of editing view-->
 
 </template>
 
