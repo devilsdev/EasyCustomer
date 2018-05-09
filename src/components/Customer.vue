@@ -1,5 +1,5 @@
 <template>
-    <tbody>
+    <tbody v-show="!isEditing">
         <tr>
             <td>{{ customer.customerNumber }}</td>
             <td>{{ customer.name }}</td>

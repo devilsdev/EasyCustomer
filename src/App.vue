@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="ui header" id="heading">Easy Customer</h1>
+    <img width="130" height="130" src="../public/assets/logo.png">
     <div class="ui center aligned grid" id="contentGrid">
       <customer-list v-bind:customers="customers"></customer-list>
       <new-customer id="addCustomerButton" v-on:create-customer="addCustomer"></new-customer>
@@ -61,10 +61,4 @@ export default {
   bottom: 30px;
   right: 30px;
 }
-
-#heading{
-  text-align: center;
-  padding-top: 4vh;
-}
-
 </style>

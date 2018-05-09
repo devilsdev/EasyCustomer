@@ -72,8 +72,7 @@ export default {
 <style>
 
 #searchbar{
-  padding-top: 2.5vh;
-  padding-bottom: 5vh;
+  padding-bottom: 2.5vh;
 }
 
 </style>
