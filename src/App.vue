@@ -34,10 +34,10 @@ export default {
     // adds a new customer
     addCustomer (customer) {
       this.customers.push(customer) // TODO: do a reload with Vue Router instead, to load live data after insert
-      this.$http.post('http://localhost:5000/api/customer', customer)
+      this.$http.post('https://easy-customer-api.herokuapp.com/api/customer', customer)
     },
     getCustomers: function () {
-      this.$http.get('http://localhost:5000/api/customer').then(function (data) {
+      this.$http.get('https://easy-customer-api.herokuapp.com/api/customer').then(function (data) {
         this.customers = data.body
       })
     }

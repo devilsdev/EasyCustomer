@@ -56,13 +56,13 @@ export default {
   },
   methods: {
     deleteCustomer (customer) {
-      this.$http.delete('http://localhost:5000/api/customer/' + customer._id)
+      this.$http.delete('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id)
       const customerIndex = this.customers.indexOf(customer)
       this.customers.splice(customerIndex, 1)
     },
     updateCustomer (customer) {
       console.log(customer)
-      this.$http.put('http://localhost:5000/api/customer/' + customer._id, customer)
+      this.$http.put('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id, customer)
     }
   }
 }
