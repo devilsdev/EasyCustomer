@@ -1,7 +1,7 @@
 <template>
-    <div class="">
-        <div class="ui search" id="searchbar">
-          <input class="prompt" v-model="search" type="text" placeholder="Search for Customers...">
+    <div id="customerList">
+        <div id="searchbar">
+          <input id="searchbarInput" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
         <div class="ui celled table">
           <thead>
@@ -70,9 +70,19 @@ export default {
 </script>
 
 <style>
-
-#searchbar{
-  padding-bottom: 2.5vh;
+#customerList input[type="text"]{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
 }
-
 </style>
