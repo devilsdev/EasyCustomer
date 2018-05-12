@@ -24,6 +24,9 @@
             v-bind:customer="customer" :key="customer._id">
           </customer>
         </div>
+        <div v-if="filteredCustomers.length === 0">
+          No Customers here...
+        </div>
     </div>
 </template>
 
