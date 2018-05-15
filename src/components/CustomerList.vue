@@ -66,7 +66,7 @@ export default {
         dangerMode: true
       }).then(() => {
         // try to delete the customer
-        this.$http.delete('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id)
+        this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
           .then(() => {
             swal('Customer has been deleted successfully!', {icon: 'success'})
             const customerIndex = this.customers.indexOf(customer)
@@ -79,7 +79,7 @@ export default {
       })
     },
     updateCustomer (customer) {
-      this.$http.put('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id, customer)
+      this.$http.put('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id, customer)
         .then(response => {
           console.log('Updated Customer with id: ' + customer._id)
         }, response => {
