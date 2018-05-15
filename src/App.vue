@@ -10,12 +10,19 @@
       <customer-list v-bind:customers="customers"></customer-list>
       <new-customer id="addCustomerButton" v-on:create-customer="addCustomer"></new-customer>
     </div>
+    <div v-if="isLoadingCustomers" id="isLoadingPopup">
+      <h1>Loading Customers...</h1>
+    </div>
+    <div v-if="emptyCustomerList" id="emptyCustomersPopup">
+      <h1>No Customers found</h1>
+    </div>
   </div>
 </template>
 
 <script>
 import CustomerList from './components/CustomerList'
 import NewCustomer from './components/NewCustomer'
+import swal from 'sweetalert'
 
 export default {
   name: 'App',
@@ -28,7 +35,9 @@ export default {
   // TODO: replace test data with real data from API
     return {
       search: '',
-      customers: []
+      customers: [],
+      isLoadingCustomers: false,
+      emptyCustomerList: false
     }
   },
   beforeMount: function () {
@@ -38,12 +47,24 @@ export default {
   methods: {
     // adds a new customer
     addCustomer (customer) {
-      this.customers.push(customer) // TODO: do a reload with Vue Router instead, to load live data after insert
       this.$http.post('https://easy-customer-api.herokuapp.com/api/customer', customer)
+        .then(response => {
+          this.customers.push(customer) // TODO: do a reload with Vue Router instead, to load live data after insert
+          console.log('Customer added ' + customer.name + ' ' + customer.lastname)
+        }, response => {
+          swal('Could not add Customer', {icon: 'error'})
+        })
     },
     getCustomers: function () {
-      this.$http.get('https://easy-customer-api.herokuapp.com/api/customer').then(function (data) {
-        this.customers = data.body
+      this.isLoadingCustomers = true
+      this.$http.get('https://easy-customer-api.herokuapp.com/api/customer').then(response => {
+        this.customers = response.body
+        this.isLoadingCustomers = false
+        if (this.customers.length === 0) {
+          this.emptyCustomerList = true
+        }
+      }, response => {
+        swal('Could not get Customers', {icon: 'error'})
       })
     }
   }
@@ -90,5 +111,15 @@ export default {
   bottom: 30px;
   right: 30px;
   color: #3700B3;
+}
+
+#isLoadingPopup{
+  width: 270px;
+  margin: 3% auto;
+}
+
+#emptyCustomersPopup{
+  width: 270px;
+  margin: 3% auto;
 }
 </style>

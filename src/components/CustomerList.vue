@@ -24,13 +24,11 @@
             v-bind:customer="customer" :key="customer._id">
           </customer>
         </div>
-        <div v-if="filteredCustomers.length === 0">
-          No Customers here...
-        </div>
     </div>
 </template>
 
 <script type = "text/javascript">
+import swal from 'sweetalert'
 import Customer from './Customer'
 
 export default {
@@ -59,13 +57,34 @@ export default {
   },
   methods: {
     deleteCustomer (customer) {
-      this.$http.delete('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id)
-      const customerIndex = this.customers.indexOf(customer)
-      this.customers.splice(customerIndex, 1)
+      // ask user if he wants to delete customer
+      swal({
+        title: 'Delete this Customer? ' + customer.name + ' ' + customer.lastname,
+        text: 'Once deleted, you will not be able to recover your Customer data',
+        icon: 'warning',
+        button: true,
+        dangerMode: true
+      }).then(() => {
+        // try to delete the customer
+        this.$http.delete('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id)
+          .then(() => {
+            swal('Customer has been deleted successfully!', {icon: 'success'})
+            const customerIndex = this.customers.indexOf(customer)
+            this.customers.splice(customerIndex, 1)
+          }, response => {
+            // handle error
+            console.log('ERROR: ', response)
+            swal('Customer could not be deleted', {icon: 'error'})
+          })
+      })
     },
     updateCustomer (customer) {
-      console.log(customer)
       this.$http.put('https://easy-customer-api.herokuapp.com/api/customer/' + customer._id, customer)
+        .then(response => {
+          console.log('Updated Customer with id: ' + customer._id)
+        }, response => {
+          swal('Customer could not be updated', {icon: 'error'})
+        })
     }
   }
 }

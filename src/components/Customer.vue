@@ -69,7 +69,6 @@
 </template>
 
 <script type="text/javascript">
-import swal from 'sweetalert'
 export default {
   props: ['customer'],
   data () {
@@ -90,22 +89,7 @@ export default {
       this.$emit('update-customer', this.customer)
     },
     deleteCustomer (customer) {
-      // show alert then -> this.$emit('delete-customer', customer)
-      swal({
-        title: 'Are you sure?',
-        text: 'Once deleted, you will not be able to recover your Customer data',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true
-      })
-        .then((willDelete) => {
-          if (willDelete) {
-            this.$emit('delete-customer', customer)
-            swal('Customer has been deleted successfully', {
-              icon: 'success'
-            })
-          }
-        })
+      this.$emit('delete-customer', customer)
     }
   }
 }
