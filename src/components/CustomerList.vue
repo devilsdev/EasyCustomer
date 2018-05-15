@@ -67,7 +67,7 @@ export default {
       }).then(() => {
         // try to delete the customer
         this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
-          .then(() => {
+          .then(response => {
             swal('Customer has been deleted successfully!', {icon: 'success'})
             const customerIndex = this.customers.indexOf(customer)
             this.customers.splice(customerIndex, 1)
