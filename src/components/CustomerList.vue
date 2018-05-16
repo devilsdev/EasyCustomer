@@ -57,25 +57,35 @@ export default {
   },
   methods: {
     deleteCustomer (customer) {
+      console.log('deletecustomer()', customer)
       // ask user if he wants to delete customer
       swal({
         title: 'Delete this Customer? ' + customer.name + ' ' + customer.lastname,
         text: 'Once deleted, you will not be able to recover your Customer data',
         icon: 'warning',
-        button: true,
+        buttons: [true, 'Delete'],
         dangerMode: true
-      }).then(() => {
-        // try to delete the customer
-        this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
-          .then(response => {
-            swal('Customer has been deleted successfully!', {icon: 'success'})
-            const customerIndex = this.customers.indexOf(customer)
-            this.customers.splice(customerIndex, 1)
-          }, response => {
-            // handle error
-            console.log('ERROR: ', response)
-            swal('Customer could not be deleted', {icon: 'error'})
-          })
+      }).then((willDelete) => {
+        if (willDelete) {
+          // show user that it is trying to delete (wait for timeout)
+          swal('Trying to delete Customer', {buttons: false, timer: 40000})
+          // try to delete the customer
+          this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
+            .then(response => {
+              if (response.status === 200) {
+                console.log('worked')
+              }
+              swal('Customer has been deleted successfully!', {icon: 'success'})
+              const customerIndex = this.customers.indexOf(customer)
+              this.customers.splice(customerIndex, 1)
+            }, response => {
+              // handle error
+              console.log('ERROR: ', response)
+              swal('Customer could not be deleted', {icon: 'error'})
+            })
+        } else {
+          swal.close()
+        }
       })
     },
     updateCustomer (customer) {

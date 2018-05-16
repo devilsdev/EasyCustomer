@@ -40,8 +40,7 @@ export default {
       emptyCustomerList: false
     }
   },
-  beforeMount: function () {
-    // executed on page load
+  created () {
     this.getCustomers()
   },
   methods: {
@@ -49,13 +48,15 @@ export default {
     addCustomer (customer) {
       this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
         .then(response => {
-          this.customers.push(customer) // TODO: do a reload with Vue Router instead, to load live data after insert
           console.log('Customer added ' + customer.name + ' ' + customer.lastname)
+          // do reload
+          this.getCustomers()
         }, response => {
           swal('Could not add Customer', {icon: 'error'})
         })
     },
     getCustomers: function () {
+      console.log('reload customers')
       this.isLoadingCustomers = true
       this.$http.get('https://easycustomer-api.herokuapp.com/api/customer').then(response => {
         this.customers = response.body
