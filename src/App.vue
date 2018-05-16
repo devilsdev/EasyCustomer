@@ -32,7 +32,6 @@ export default {
   },
 
   data () {
-  // TODO: replace test data with real data from API
     return {
       search: '',
       customers: [],
@@ -41,6 +40,7 @@ export default {
     }
   },
   created () {
+    // called when the app is accessed
     this.getCustomers()
   },
   methods: {
