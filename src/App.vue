@@ -6,68 +6,23 @@
     <div id="subheader">
       <span id="subheader">managage your customers, easy & free</span>
     </div>
-    <div class="ui center aligned grid" id="contentGrid">
-      <customer-list v-bind:customers="customers"></customer-list>
-      <new-customer id="addCustomerButton" v-on:create-customer="addCustomer"></new-customer>
+    <!--Customer Components are rendered here-->
+    <div id="mainContent">
+          <router-view></router-view>
     </div>
-    <div v-if="isLoadingCustomers" id="isLoadingPopup">
-      <h1>Loading Customers...</h1>
-    </div>
-    <div v-if="emptyCustomerList" id="emptyCustomersPopup">
-      <h1>No Customers found</h1>
-    </div>
+    <router-link to="newcustomer"><i id="iconPlus" class="plus icon" v-on:click="openForm" v-show="!isCreating"></i></router-link>
   </div>
 </template>
 
 <script>
 import CustomerList from './components/CustomerList'
 import NewCustomer from './components/NewCustomer'
-import swal from 'sweetalert'
 
 export default {
   name: 'App',
   components: {
     CustomerList,
     NewCustomer
-  },
-
-  data () {
-    return {
-      search: '',
-      customers: [],
-      isLoadingCustomers: false,
-      emptyCustomerList: false
-    }
-  },
-  created () {
-    // called when the app is accessed
-    this.getCustomers()
-  },
-  methods: {
-    // adds a new customer
-    addCustomer (customer) {
-      this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
-        .then(response => {
-          console.log('Customer added ' + customer.name + ' ' + customer.lastname)
-          // do reload
-          this.getCustomers()
-        }, response => {
-          swal('Could not add Customer', {icon: 'error'})
-        })
-    },
-    getCustomers: function () {
-      console.log('reload customers')
-      this.isLoadingCustomers = true
-      this.$http.get('https://easycustomer-api.herokuapp.com/api/customer').then(response => {
-        this.customers = response.body
-        this.isLoadingCustomers = false
-        if (this.customers.length === 0) {
-          this.emptyCustomerList = true
-        }
-      }, response => {
-        swal('Could not get Customers', {icon: 'error'})
-      })
-    }
   }
 }
 </script>
@@ -107,7 +62,13 @@ export default {
   text-align: center;
 }
 
-#addCustomerButton{
+#mainContent{
+  margin: auto;
+  width: 62%;
+}
+
+#iconPlus{
+  font-size: 2.5em;
   position: fixed;
   bottom: 30px;
   right: 30px;

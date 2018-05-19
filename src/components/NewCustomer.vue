@@ -1,51 +1,44 @@
 <template>
-    <div class="ui middle aligned center aligned grid">
-        <i id="iconPlus" class="plus icon" v-on:click="openForm" v-show="!isCreating"></i>
-        <div class="ui middle aligned center aligned grid" v-show="isCreating">
-            <div class="column">
-                <div class="ui large form">
-                    <div class="ui stacked segment">
-                        <div class="field">
-                            <label>Customer Number</label>
-                            <input v-model="customerNumber" type="text" ref="customerNumber" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>Name</label>
-                            <input v-model="name" type="text" ref="name" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>Lastname</label>
-                            <input v-model="lastname" type="text" ref="lastname" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>Adress</label>
-                            <input v-model="adress" type="text" ref="adress" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>Postcode</label>
-                            <input v-model="postcode" type="text" ref="postcode" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>City</label>
-                            <input v-model="city" type="text" ref="city" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>Phone</label>
-                            <input v-model="phone" type="text" ref="phone" defaultValue="">
-                        </div>
-                        <div class="field">
-                            <label>E-Mail</label>
-                            <input v-model="email" type="text" ref="email" defaultValue="">
-                        </div>
-                        <div class="ui two button attached buttons">
-                            <button class="ui basic blue button" v-on:click="sendForm()">
-                                Create new Customer
-                            </button>
-                            <button class="ui basic red button" v-on:click="closeForm()">
-                                Close
-                            </button>
-                        </div>
-                    </div>
+    <div id="newcustomer">
+        <router-link to="/">Go back</router-link>
+        <div class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <label>Customer Number</label>
+                    <input v-model="customerNumber" type="text" ref="customerNumber" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>Name</label>
+                    <input v-model="name" type="text" ref="name" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>Lastname</label>
+                    <input v-model="lastname" type="text" ref="lastname" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>Adress</label>
+                    <input v-model="adress" type="text" ref="adress" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>Postcode</label>
+                    <input v-model="postcode" type="text" ref="postcode" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>City</label>
+                    <input v-model="city" type="text" ref="city" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>Phone</label>
+                    <input v-model="phone" type="text" ref="phone" defaultValue="">
+                </div>
+                <div class="field">
+                    <label>E-Mail</label>
+                    <input v-model="email" type="text" ref="email" defaultValue="">
+                </div>
+                <div class="ui button attached buttons">
+                    <button class="ui basic blue button" v-on:click="sendForm()">
+                        Create new Customer
+                    </button>
                 </div>
             </div>
         </div>
@@ -106,6 +99,11 @@ export default {
 <style>
 #iconPlus{
     font-size: 2em;
+}
+
+#newcustomer{
+    margin: auto;
+    width: 60%;
 }
 
 </style>

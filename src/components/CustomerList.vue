@@ -24,6 +24,12 @@
             v-bind:customer="customer" :key="customer._id">
           </customer>
         </div>
+      <div v-if="isLoadingCustomers" id="isLoadingPopup">
+        <h1>Loading Customers...</h1>
+      </div>
+      <div v-if="emptyCustomerList" id="emptyCustomersPopup">
+        <h1>No Customers found</h1>
+      </div>
     </div>
 </template>
 
@@ -34,12 +40,18 @@ import Customer from './Customer'
 export default {
   data () {
     return {
-      search: ''
+      search: '',
+      customers: [],
+      isLoadingCustomers: false,
+      emptyCustomerList: false
     }
   },
-  props: ['customers'],
   components: {
     Customer
+  },
+  created () {
+    // called when the app is accessed
+    this.getCustomers()
   },
   computed: {
     filteredCustomers: function () {
@@ -56,6 +68,30 @@ export default {
     }
   },
   methods: {
+    // adds a new customer
+    addCustomer (customer) {
+      this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
+        .then(response => {
+          console.log('Customer added ' + customer.name + ' ' + customer.lastname)
+          // do reload
+          this.getCustomers()
+        }, response => {
+          swal('Could not add Customer', {icon: 'error'})
+        })
+    },
+    getCustomers: function () {
+      console.log('reload customers')
+      this.isLoadingCustomers = true
+      this.$http.get('https://easycustomer-api.herokuapp.com/api/customer').then(response => {
+        this.customers = response.body
+        this.isLoadingCustomers = false
+        if (this.customers.length === 0) {
+          this.emptyCustomerList = true
+        }
+      }, response => {
+        swal('Could not get Customers', {icon: 'error'})
+      })
+    },
     deleteCustomer (customer) {
       console.log('deletecustomer()', customer)
       // ask user if he wants to delete customer
@@ -117,11 +153,4 @@ export default {
     font: 16px Arial, Helvetica, sans-serif;
     height: 45px;
 }
-
-@media only screen and (max-width: 800px) {
-  #listviewcustomer{
-    max-width:100px;
-  }
-}
-
 </style>
