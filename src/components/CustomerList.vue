@@ -3,7 +3,7 @@
         <div id="searchbar">
           <input id="searchbarInput" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
-        <div class="ui celled table">
+        <div class="ui celled table" id="listviewcustomer">
           <thead>
             <tr>
               <th>Customer No.</th>
@@ -117,4 +117,11 @@ export default {
     font: 16px Arial, Helvetica, sans-serif;
     height: 45px;
 }
+
+@media only screen and (max-width: 800px) {
+  #listviewcustomer{
+    max-width:100px;
+  }
+}
+
 </style>
