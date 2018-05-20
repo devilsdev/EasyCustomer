@@ -1,51 +1,54 @@
 <template>
     <div id="newcustomer">
         <router-link to="/">Go back</router-link>
-        <div class="ui large form">
-            <div class="ui stacked segment">
-                <div class="field">
-                    <label>Customer Number</label>
-                    <input v-model="customerNumber" type="text" ref="customerNumber" defaultValue="">
-                </div>
-                <div class="field">
-                    <label>Name</label>
-                    <input v-model="name" type="text" ref="name" defaultValue="">
-                </div>
-                <div class="field">
+        <md-card>
+            <md-card-header>
+                <div class="md-title">New Customer</div>
+            </md-card-header>
+            <m-card-content>
+                <md-field>
+                    <label>Customer-No.</label>
+                    <md-input v-model="customerNumber"></md-input>
+                </md-field>
+                <md-field>
+                    <label>Firstname</label>
+                    <md-input v-model="name"></md-input>
+                </md-field>
+                <md-field>
                     <label>Lastname</label>
-                    <input v-model="lastname" type="text" ref="lastname" defaultValue="">
-                </div>
-                <div class="field">
+                    <md-input v-model="lastname"></md-input>
+                </md-field>
+                <md-field>
                     <label>Adress</label>
-                    <input v-model="adress" type="text" ref="adress" defaultValue="">
-                </div>
-                <div class="field">
+                    <md-input v-model="adress"></md-input>
+                </md-field>
+                <md-field>
                     <label>Postcode</label>
-                    <input v-model="postcode" type="text" ref="postcode" defaultValue="">
-                </div>
-                <div class="field">
+                    <md-input v-model="postcode"></md-input>
+                </md-field>
+                <md-field>
                     <label>City</label>
-                    <input v-model="city" type="text" ref="city" defaultValue="">
-                </div>
-                <div class="field">
+                    <md-input v-model="city"></md-input>
+                </md-field>
+                <md-field>
                     <label>Phone</label>
-                    <input v-model="phone" type="text" ref="phone" defaultValue="">
-                </div>
-                <div class="field">
+                    <md-input v-model="phone"></md-input>
+                </md-field>
+                <md-field>
                     <label>E-Mail</label>
-                    <input v-model="email" type="text" ref="email" defaultValue="">
-                </div>
-                <div class="ui button attached buttons">
-                    <button class="ui basic blue button" v-on:click="sendForm()">
-                        Create new Customer
-                    </button>
-                </div>
-            </div>
-        </div>
+                    <md-input v-model="email"></md-input>
+                </md-field>
+            </m-card-content>
+            <md-card-actions>
+                <md-button v-on:click="sendForm()">Add Customer</md-button>
+            </md-card-actions>
+        </md-card>
     </div>
 </template>
 
 <script>
+import swal from 'sweetalert'
+import router from 'vue-router'
 export default {
   data () {
     return {
@@ -56,17 +59,10 @@ export default {
       postcode: '',
       city: '',
       phone: '',
-      email: '',
-      isCreating: false
+      email: ''
     }
   },
   methods: {
-    openForm () {
-      this.isCreating = true
-    },
-    closeForm () {
-      this.isCreating = false
-    },
     sendForm () {
       console.log(this.name.length)
       if (this.name.length > 0 && this.lastname.length > 0 && this.customerNumber.length > 0) {
@@ -79,7 +75,7 @@ export default {
         const city = this.city
         const phone = this.phone
         const email = this.email
-        this.$emit('create-customer', {
+        this.addCustomer({
           name,
           lastname,
           phone,
@@ -90,7 +86,17 @@ export default {
           customerNumber
         })
       }
-      this.isCreating = false
+    },
+    // adds a new customer
+    addCustomer (customer) {
+      this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
+        .then(response => {
+          console.log('Customer added ' + customer.name + ' ' + customer.lastname)
+          // redirect to home
+          router.go('/')
+        }, response => {
+          swal('Could not add Customer', {icon: 'error'})
+        })
     }
   }
 }
@@ -103,7 +109,8 @@ export default {
 
 #newcustomer{
     margin: auto;
-    width: 60%;
+    min-width: 200px;
+    max-width: 700px;
 }
 
 </style>

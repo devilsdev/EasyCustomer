@@ -3,32 +3,30 @@
         <div id="searchbar">
           <input id="searchbarInput" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
-        <div class="ui celled table" id="listviewcustomer">
-          <thead>
-            <tr>
-              <th>Customer No.</th>
-              <th>Name</th>
-              <th>Lastname</th>
-              <th>Street</th>
-              <th>Postcode</th>
-              <th>City</th>
-              <th>Telephone</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        <md-table md-card>
+          <md-table-row>
+            <md-table-head>Customer No.</md-table-head>
+            <md-table-head>Name</md-table-head>
+            <md-table-head>Lastname</md-table-head>
+            <md-table-head>Street</md-table-head>
+            <md-table-head>Postcode</md-table-head>
+            <md-table-head>City</md-table-head>
+            <md-table-head>Telephone</md-table-head>
+            <md-table-head>Email</md-table-head>
+            <md-table-head>Actions</md-table-head>
+          </md-table-row>
           <customer
             v-on:update-customer="updateCustomer"
             v-on:delete-customer="deleteCustomer"
             v-for="customer in filteredCustomers"
             v-bind:customer="customer" :key="customer._id">
           </customer>
-        </div>
+        </md-table>
       <div v-if="isLoadingCustomers" id="isLoadingPopup">
-        <h1>Loading Customers...</h1>
+        <h1 class="md-title">Loading Customers...</h1>
       </div>
       <div v-if="emptyCustomerList" id="emptyCustomersPopup">
-        <h1>No Customers found</h1>
+        <h1 class="md-title">No Customers found</h1>
       </div>
     </div>
 </template>
@@ -38,6 +36,7 @@ import swal from 'sweetalert'
 import Customer from './Customer'
 
 export default {
+  name: 'CustomerList',
   data () {
     return {
       search: '',
@@ -50,7 +49,7 @@ export default {
     Customer
   },
   created () {
-    // called when the app is accessed
+    // called when the List is accessed
     this.getCustomers()
   },
   computed: {
@@ -68,17 +67,6 @@ export default {
     }
   },
   methods: {
-    // adds a new customer
-    addCustomer (customer) {
-      this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
-        .then(response => {
-          console.log('Customer added ' + customer.name + ' ' + customer.lastname)
-          // do reload
-          this.getCustomers()
-        }, response => {
-          swal('Could not add Customer', {icon: 'error'})
-        })
-    },
     getCustomers: function () {
       console.log('reload customers')
       this.isLoadingCustomers = true
