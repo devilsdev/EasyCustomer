@@ -74,8 +74,8 @@ export default {
       this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
         .then(response => {
           console.log('Customer added ' + customer.name + ' ' + customer.lastname)
-          // TODO: redirect to home
-          router.push({ name: "CustomerList"})
+          // Navigates back to Home
+          this.$router.push({ path: '/'})
         }, response => {
           swal('Could not add Customer', {icon: 'error'})
         })
@@ -85,14 +85,10 @@ export default {
 </script>
 
 <style>
-#iconPlus{
-    font-size: 2em;
-}
-
-#newCustomerForm{
-    /*center the form*/
+#newcustomer{
     width: 100%;
     margin: 0 auto;
+    max-width: 1000px;
 }
 
 input[type=text] {

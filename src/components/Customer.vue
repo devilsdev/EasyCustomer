@@ -1,18 +1,21 @@
 <template>
-    <md-table-row>
-        <md-table-cell>{{ customer.customerNumber }}</md-table-cell>
-        <md-table-cell>{{ customer.name }}</md-table-cell>
-        <md-table-cell>{{ customer.lastname }}</md-table-cell>
-        <md-table-cell>{{ customer.adress }} </md-table-cell>
-        <md-table-cell>{{ customer.postcode }} </md-table-cell>
-        <md-table-cell>{{ customer.city }} </md-table-cell>
-        <md-table-cell>{{ customer.phone }} </md-table-cell>
-        <md-table-cell>{{ customer.email }} </md-table-cell>
-        <md-table-cell>
-            <a v-on:click="showForm"><i class="edit icon" ></i> Edit</a>
-            <a v-on:click="deleteCustomer(customer)"><i class="trash alternate icon" ></i> Delete</a>
-        </md-table-cell>
-    </md-table-row>
+  <md-card class="md-primary">
+    <md-card-header>
+      <md-card-header-text>
+        <div class="md-title">{{customer.name}} {{customer.lastname}}</div>
+        <div class="md-subhead">{{customer.customerNumber}}</div>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      {{customer.adress}}, {{customer.postcode}}, {{customer.city}} <br>
+      Phone: {{customer.phone}} <br>
+      Email: {{customer.email}}
+    </md-card-content>
+    <md-card-actions>
+      <md-button v-on:click="showForm">Edit</md-button>
+      <md-button v-on:click="deleteCustomer(customer)">Delete</md-button>
+    </md-card-actions>
+  </md-card>
 </template>
 
 <script type="text/javascript">
@@ -43,4 +46,10 @@ export default {
 </script>
 
 <style>
+  .md-card {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+  }
 </style>

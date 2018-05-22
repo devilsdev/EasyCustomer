@@ -3,25 +3,14 @@
         <div id="searchbar">
           <input id="searchbarInput" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
-        <md-table md-card>
-          <md-table-row>
-            <md-table-head>Customer No.</md-table-head>
-            <md-table-head>Name</md-table-head>
-            <md-table-head>Lastname</md-table-head>
-            <md-table-head>Street</md-table-head>
-            <md-table-head>Postcode</md-table-head>
-            <md-table-head>City</md-table-head>
-            <md-table-head>Telephone</md-table-head>
-            <md-table-head>Email</md-table-head>
-            <md-table-head>Actions</md-table-head>
-          </md-table-row>
-          <customer
+        <div id="customerCards">
+            <customer
             v-on:update-customer="updateCustomer"
             v-on:delete-customer="deleteCustomer"
             v-for="customer in filteredCustomers"
             v-bind:customer="customer" :key="customer._id">
           </customer>
-        </md-table>
+        </div>
       <div v-if="isLoadingCustomers" id="isLoadingPopup">
         <h1 class="md-title">Loading Customers...</h1>
       </div>

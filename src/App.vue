@@ -40,7 +40,7 @@ export default {
 
 #mainContent{
   margin: auto;
-  width: 62%;
+  width: 85%;
 }
 
 #isLoadingPopup{
