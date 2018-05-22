@@ -56,4 +56,11 @@ export default {
 /*prevent link coloring*/
 a { color: inherit; }
 a:hover{color: inherit}
+
+/*MOBILE STYLES*/
+@media only screen and (max-width: 400px){
+  #mainContent{
+    width: 100%;
+  }
+}
 </style>

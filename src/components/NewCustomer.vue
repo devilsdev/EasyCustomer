@@ -1,54 +1,33 @@
 <template>
     <div id="newcustomer">
-        <router-link to="/">Go back</router-link>
-        <md-card>
-            <md-card-header>
-                <div class="md-title">New Customer</div>
-            </md-card-header>
-            <m-card-content>
-                <md-field>
-                    <label>Customer-No.</label>
-                    <md-input v-model="customerNumber"></md-input>
-                </md-field>
-                <md-field>
-                    <label>Firstname</label>
-                    <md-input v-model="name"></md-input>
-                </md-field>
-                <md-field>
-                    <label>Lastname</label>
-                    <md-input v-model="lastname"></md-input>
-                </md-field>
-                <md-field>
-                    <label>Adress</label>
-                    <md-input v-model="adress"></md-input>
-                </md-field>
-                <md-field>
-                    <label>Postcode</label>
-                    <md-input v-model="postcode"></md-input>
-                </md-field>
-                <md-field>
-                    <label>City</label>
-                    <md-input v-model="city"></md-input>
-                </md-field>
-                <md-field>
-                    <label>Phone</label>
-                    <md-input v-model="phone"></md-input>
-                </md-field>
-                <md-field>
-                    <label>E-Mail</label>
-                    <md-input v-model="email"></md-input>
-                </md-field>
-            </m-card-content>
-            <md-card-actions>
-                <md-button v-on:click="sendForm()">Add Customer</md-button>
-            </md-card-actions>
-        </md-card>
+        <router-link to="/"><i class="material-icons">keyboard_backspace</i></router-link>
+        <div id="newCustomerForm">
+            <h1 class="md-title">New Customer</h1>
+            <form method="post">
+                <label for="customerno">Customer-No.*</label>
+                <input v-model="customerNumber" id="customerno" type="text" placeholder="Enter a Customer-No."/>
+                <label for="name">Firstname*</label>
+                <input v-model="name" id="name" type="text" placeholder="Enter a Firstname"/>
+                <label for="lastname">Lastname*</label>
+                <input v-model="lastname" id="name" type="text" placeholder="Enter a Lastname"/>
+                <label for="adress">Adress</label>
+                <input v-model="adress" id="adress" type="text" placeholder="Enter an Adress"/>
+                <label for="postcode">Postcode</label>
+                <input v-model="postcode" id="postcode" type="text" placeholder="Enter a Postcode"/>
+                <label for="adress">City</label>
+                <input v-model="city" id="city" type="text" placeholder="Enter a City"/>
+                <label for="phone">Phone</label>
+                <input v-model="phone" id="phone" type="text" placeholder="Enter a Phonenumber"/>
+                <label for="email">E-Mail</label>
+                <input v-model="email" id="email" type="text" placeholder="Enter an Email"/>
+            </form>
+            <md-button id="saveButton" class="md-primary" v-on:click="sendForm()">Save</md-button>
+        </div>
     </div>
 </template>
 
 <script>
 import swal from 'sweetalert'
-import router from 'vue-router'
 export default {
   data () {
     return {
@@ -85,6 +64,9 @@ export default {
           postcode,
           customerNumber
         })
+      } else {
+          // show error to user
+          swal('Please fill in all needed fields!', {icon: 'error'})
       }
     },
     // adds a new customer
@@ -92,8 +74,8 @@ export default {
       this.$http.post('https://easycustomer-api.herokuapp.com/api/customer', customer)
         .then(response => {
           console.log('Customer added ' + customer.name + ' ' + customer.lastname)
-          // redirect to home
-          router.go('/')
+          // TODO: redirect to home
+          router.push({ name: "CustomerList"})
         }, response => {
           swal('Could not add Customer', {icon: 'error'})
         })
@@ -107,10 +89,36 @@ export default {
     font-size: 2em;
 }
 
-#newcustomer{
-    margin: auto;
-    min-width: 200px;
-    max-width: 700px;
+#newCustomerForm{
+    /*center the form*/
+    width: 100%;
+    margin: 0 auto;
 }
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid grey;
+}
+
+input[type=text]:focus{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #E94B3C;
+    outline: none;
+}
+
+#saveButton{
+    float: right;
+    margin: 0;
+    margin-top: 1%;
+    background-color: #E94B3C;
+    color:white;
+}
+
 
 </style>

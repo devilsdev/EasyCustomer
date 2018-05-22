@@ -141,4 +141,13 @@ export default {
     font: 16px Arial, Helvetica, sans-serif;
     height: 45px;
 }
+
+#customerList input:focus{
+  border-bottom: 1px solid #E94B3C;
+}
+
+#customerList::selection{
+  color: #fff;
+  background-color: #E94B3C;
+}
 </style>
