@@ -12,7 +12,7 @@
       Email: {{customer.email}}
     </md-card-content>
     <md-card-actions>
-      <router-link to="customeredit" params: customer>
+      <router-link to="customeredit">
         <md-button v-on:click="goToEditView(customer)">Edit</md-button>
       </router-link>
       <md-button v-on:click="deleteCustomer(customer)">Delete</md-button>

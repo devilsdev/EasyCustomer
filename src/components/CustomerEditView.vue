@@ -1,7 +1,6 @@
 <template>
   <div id="customerEditView">
-    <!--->
-    <div class="md-title">{{customerData.name}} {{customerData.lastname}}</div>
+    <md-button v-on:click="test()">test</md-button>
   </div>
 </template>
 
@@ -13,14 +12,23 @@ export default {
       customerData: {}
     }
   },
-  created () {
+  mounted () {
+    // get the customer
     // TODO: this is somehow NOT trigerred on the first access of the component.
     bus.$on('updateCustomer', (customer) => {
-      console.log('event "updateCustomer" trigerred successfully!')
-      this.customerData = customer
-      console.log(this.customerData.name)
-      this.getCustomerData(customer)
+      this.setCustomer(customer)
     })
+  },
+  methods: {
+    setCustomer (customer) {
+      this.customerData = customer
+      // here customerData is filled
+      console.log(this.customerData)
+    },
+    test() {
+      // here customerData is an empty object - why is that?
+      console.log(this.customerData)
+    }
   }
 }
 </script>
