@@ -7,21 +7,14 @@
     </md-toolbar>
     <!--Customer Components are rendered here-->
     <div id="mainContent">
-          <router-view></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import CustomerList from './components/CustomerList'
-import NewCustomer from './components/NewCustomer'
-
 export default {
-  name: 'App',
-  components: {
-    CustomerList,
-    NewCustomer
-  }
+  name: 'EasyCustomer'
 }
 </script>
 

@@ -45,28 +45,22 @@ export default {
     sendForm () {
       console.log(this.name.length)
       if (this.name.length > 0 && this.lastname.length > 0 && this.customerNumber.length > 0) {
-        // create constants to make sure nothing is edited after the user pressed send
-        const customerNumber = this.customerNumber
-        const name = this.name
-        const lastname = this.lastname
-        const adress = this.adress
-        const postcode = this.postcode
-        const city = this.city
-        const phone = this.phone
-        const email = this.email
-        this.addCustomer({
-          name,
-          lastname,
-          phone,
-          email,
-          adress,
-          city,
-          postcode,
-          customerNumber
-        })
+        // create new customer object
+        let newCustomer = {
+          name: this.name,
+          lastname: this.lastname,
+          phone: this.phone,
+          email: this.email,
+          adress: this.adress,
+          city: this.city,
+          postcode: this.postcode,
+          customerNumber: this.customerNumber
+        }
+        // pass customer to function
+        this.addCustomer(newCustomer)
       } else {
-          // show error to user
-          swal('Please fill in all needed fields!', {icon: 'error'})
+        // show error to user
+        swal('Please fill in all needed fields!', {icon: 'error'})
       }
     },
     // adds a new customer
@@ -75,7 +69,7 @@ export default {
         .then(response => {
           console.log('Customer added ' + customer.name + ' ' + customer.lastname)
           // Navigates back to Home
-          this.$router.push({ path: '/'})
+          this.$router.push({path: '/'})
         }, response => {
           swal('Could not add Customer', {icon: 'error'})
         })
@@ -115,6 +109,5 @@ input[type=text]:focus{
     background-color: #E94B3C;
     color:white;
 }
-
 
 </style>

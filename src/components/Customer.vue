@@ -12,31 +12,26 @@
       Email: {{customer.email}}
     </md-card-content>
     <md-card-actions>
-      <md-button v-on:click="showForm">Edit</md-button>
+      <router-link to="customeredit" params: customer>
+        <md-button v-on:click="goToEditView(customer)">Edit</md-button>
+      </router-link>
       <md-button v-on:click="deleteCustomer(customer)">Delete</md-button>
     </md-card-actions>
   </md-card>
 </template>
 
 <script type="text/javascript">
+import { bus } from '../main'
 export default {
   props: ['customer'],
   data () {
     return {
-      isEditing: false
     }
   },
   methods: {
-    showForm () {
-      this.isEditing = true
-    },
-    hideForm () {
-      this.isEditing = false
-    },
-    callUpdateCustomer (customer) {
-      this.isEditing = false
-      // update the saved data
-      this.$emit('update-customer', this.customer)
+    goToEditView (customer) {
+      // emit an event on global bus to pass data to editView component
+      bus.$emit('updateCustomer', customer)
     },
     deleteCustomer (customer) {
       this.$emit('delete-customer', customer)

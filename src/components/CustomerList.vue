@@ -4,12 +4,12 @@
           <input id="searchbarInput" v-model="search" type="text" placeholder="Search for Customers...">
         </div>
         <div id="customerCards">
-            <customer
+          <customer
             v-on:update-customer="updateCustomer"
             v-on:delete-customer="deleteCustomer"
             v-for="customer in filteredCustomers"
-            v-bind:customer="customer" :key="customer._id">
-          </customer>
+            v-bind:customer="customer" :key="customer._id"
+          ></customer>
         </div>
       <div v-if="isLoadingCustomers" id="isLoadingPopup">
         <h1 class="md-title">Loading Customers...</h1>
@@ -23,6 +23,7 @@
 <script type = "text/javascript">
 import swal from 'sweetalert'
 import Customer from './Customer'
+import CustomerEditView from './CustomerEditView'
 
 export default {
   name: 'CustomerList',
@@ -35,10 +36,11 @@ export default {
     }
   },
   components: {
-    Customer
+    Customer,
+    CustomerEditView
   },
   created () {
-    // called when the List is accessed
+    // called when this component is rendered the first time
     this.getCustomers()
   },
   computed: {
@@ -133,10 +135,5 @@ export default {
 
 #customerList input:focus{
   border-bottom: 1px solid #E94B3C;
-}
-
-#customerList::selection{
-  color: #fff;
-  background-color: #E94B3C;
 }
 </style>
