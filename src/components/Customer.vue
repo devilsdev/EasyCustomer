@@ -29,9 +29,15 @@ export default {
     }
   },
   methods: {
+    /*
+    emit an event on global bus to pass data to editView component
+    this.nextTick() waits until the next component is being rendered, so the event
+    is registered on the CustomerEditView Component
+    */
     goToEditView (customer) {
-      // emit an event on global bus to pass data to editView component
-      bus.$emit('updateCustomer', customer)
+      this.$nextTick().then(() => {
+        bus.$emit('updateCustomer', this.customer)
+      })
     },
     deleteCustomer (customer) {
       this.$emit('delete-customer', customer)

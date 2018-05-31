@@ -5,7 +5,6 @@
         </div>
         <div id="customerCards">
           <customer
-            v-on:update-customer="updateCustomer"
             v-on:delete-customer="deleteCustomer"
             v-for="customer in filteredCustomers"
             v-bind:customer="customer" :key="customer._id"
@@ -102,14 +101,6 @@ export default {
           swal.close()
         }
       })
-    },
-    updateCustomer (customer) {
-      this.$http.put('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id, customer)
-        .then(response => {
-          console.log('Updated Customer with id: ' + customer._id)
-        }, response => {
-          swal('Customer could not be updated', {icon: 'error'})
-        })
     }
   }
 }

@@ -20,8 +20,7 @@ export default new Router({
     {
       path: '/customeredit',
       name: 'CustomerEditView',
-      component: CustomerEditView,
-      props: true
+      component: CustomerEditView
     }
   ]
 })
