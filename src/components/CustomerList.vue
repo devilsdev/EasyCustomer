@@ -48,8 +48,8 @@ export default {
         // each property of object in an array
         let customerProps = Object.values(customer)
         for (let prop of customerProps) {
+          // TODO: search for more than 1 property
           if (prop.toLowerCase().match(this.search.toLowerCase())) {
-            // if prop is matching with name or lastname, search for lastname or name
             return true
           }
         }
@@ -71,7 +71,6 @@ export default {
       })
     },
     deleteCustomer (customer) {
-      console.log('deletecustomer()', customer)
       // ask user if he wants to delete customer
       swal({
         title: 'Delete this Customer? ' + customer.name + ' ' + customer.lastname,
@@ -82,13 +81,10 @@ export default {
       }).then((willDelete) => {
         if (willDelete) {
           // show user that it is trying to delete (wait for timeout)
-          swal('Trying to delete Customer', {buttons: false, timer: 40000})
+          swal('Trying to delete Customer', {buttons: false})
           // try to delete the customer
           this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
             .then(response => {
-              if (response.status === 200) {
-                console.log('worked')
-              }
               swal('Customer has been deleted successfully!', {icon: 'success'})
               const customerIndex = this.customers.indexOf(customer)
               this.customers.splice(customerIndex, 1)
