@@ -86,8 +86,8 @@ export default {
           this.$http.delete('https://easycustomer-api.herokuapp.com/api/customer/' + customer._id)
             .then(response => {
               swal('Customer has been deleted successfully!', {icon: 'success'})
-              const customerIndex = this.customers.indexOf(customer)
-              this.customers.splice(customerIndex, 1)
+              // fetch the customers again
+              this.getCustomers()
             }, response => {
               // handle error
               console.log('ERROR: ', response)
