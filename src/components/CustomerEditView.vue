@@ -5,7 +5,7 @@
       <h1 class="md-title">Edit Customer</h1>
       <img id="avatar" src="https://www.w3schools.com/howto/img_avatar.png" alt="People">
     </div>
-    <div id="customerEditForm">
+    <div id="customerEditForm" @submit="checkForm">
       <form method="post">
         <label for="customerno">Customer-No.*</label>
         <input v-model="customerNumber" id="customerno" type="text" >
@@ -21,9 +21,9 @@
         <input v-model="city" id="city" type="text"/>
         <label for="phone">Phone</label>
         <input v-model="phone" id="phone" type="text"/>
-        <label for="email">E-Mail</label>
-        <input v-model="email" id="email" type="text"/>
-        <md-button id="saveButton" v-on:click="updateCustomer(customer)">Save</md-button>
+        <label for="email"> E-Mail</label>
+        <input v-model="email" id="email" type="email"/>
+        <md-button id="saveButton" type="submit">Save</md-button>
       </form>
     </div>
   </div>
@@ -32,9 +32,11 @@
 <script type="text/javascript">
 import { bus } from '../main'
 import swal from 'sweetalert'
+import { validEmail } from '../globals/validation'
 export default {
   data () {
     return {
+      errors: [],
       customer: {},
       customerNumber: '',
       name: '',
@@ -64,7 +66,7 @@ export default {
     bus.$off('updateCustomer', this.customer)
   },
   methods: {
-    updateCustomer () {
+    updateCustomer: function () {
       let newCustomer = {
         name: this.name,
         lastname: this.lastname,
@@ -82,9 +84,20 @@ export default {
         }, response => {
           swal('Customer could not be updated', {icon: 'error'})
         })
+    },
+    checkForm: function (e) {
+      e.preventDefault()
+      this.errors = []
+      // check for any errors on the form
+      if (!validEmail(this.email)) {
+        this.errors.push('Valid email required.')
+      }
+      if (!this.errors.length) {
+        // if there are no errors, update the customer
+        this.updateCustomer()
+      }
     }
   }
-
 }
 </script>
 
@@ -100,7 +113,8 @@ export default {
   border-radius: 50%;
 }
 
-input[type=text] {
+input[type=text],
+input[type=email]{
     width: 100%;
     padding: 5px 20px;
     margin: 8px 0;
@@ -108,7 +122,8 @@ input[type=text] {
     border: 1px solid grey;
 }
 
-input[type=text]:focus{
+input[type=text]:focus,
+input[type=email]:focus{
     border: 1px solid #E94B3C;
     outline: none;
 }
