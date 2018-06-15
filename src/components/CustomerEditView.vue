@@ -3,7 +3,6 @@
     <router-link to="/"><i class="material-icons">keyboard_backspace</i></router-link>
     <div id="header">
       <h1 class="md-title">Edit Customer</h1>
-      <img id="avatar" src="https://www.w3schools.com/howto/img_avatar.png" alt="People">
     </div>
     <div id="customerEditForm" @submit="checkForm">
       <form method="post">
@@ -116,7 +115,7 @@ export default {
 input[type=text],
 input[type=email]{
     width: 100%;
-    padding: 5px 20px;
+    padding: 0.4em 0.4em;
     margin: 8px 0;
     box-sizing: border-box;
     border: 1px solid grey;

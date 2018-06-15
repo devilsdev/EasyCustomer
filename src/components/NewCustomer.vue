@@ -19,7 +19,7 @@
                 <label for="phone">Phone</label>
                 <input v-model="phone" id="phone" type="text" placeholder="Enter a Phonenumber"/>
                 <label for="email">E-Mail</label>
-                <input v-model="email" id="email" type="text" placeholder="Enter an Email"/>
+                <input v-model="email" id="email" type="email" placeholder="Enter an Email"/>
             </form>
             <md-button id="saveButton" class="md-primary" v-on:click="sendForm()">Save</md-button>
         </div>
@@ -85,19 +85,17 @@ export default {
     max-width: 1000px;
 }
 
-input[type=text] {
+input[type=text],
+input[type=email]{
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 0.4em 0.4em;
+    margin: 0.4em 0;
     box-sizing: border-box;
     border: 1px solid grey;
 }
 
-input[type=text]:focus{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+input[type=text]:focus,
+input[type=email]:focus{
     border: 1px solid #E94B3C;
     outline: none;
 }
